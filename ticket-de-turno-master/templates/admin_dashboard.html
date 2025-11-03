@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/ticket.css') }}">
+  <style>
+    .admin-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #333;
+    }
+    .admin-nav h1 {
+      color: white;
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .admin-nav a {
+      text-decoration: none;
+      background: #d9534f;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .dashboard-menu {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="admin-nav">
+    <h1>Panel de Administrador</h1>
+    <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+  </nav>
+
+  <div class="container">
+    <h2>Bienvenido, {{ current_user.usuario }}</h2>
+    <p>Este es el panel de administración. Desde aquí podrás gestionar los tickets y catálogos.</p>
+    <p>Tu rol es: <strong>{{ current_user.rol }}</strong>.</p>
+
+    <div class="dashboard-menu">
+       <div class="form-actions">
+           <button type="button"
+                   onclick="window.location.href='{{ url_for('admin_turnos_get') }}'">
+             Administrar Turnos
+           </button>
+       </div>
+
+       <div class="form-actions">
+           <button type="button"
+                   onclick="window.location.href='{{ url_for('admin_catalogos_menu') }}'">
+             Administrar Catálogos
+           </button>
+       </div>
+       <div class="form-actions">
+           <button type="button" onclick="alert('Próximamente!')" style="background-color: #777;" disabled>
+             Ver Gráficas
+           </button>
+       </div>
+    </div>
+
+  </div>
+</body>
+</html>

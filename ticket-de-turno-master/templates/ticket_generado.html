@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket Generado</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/ticket.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header class="top-header">
+      <img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Logo Institución 1">
+      <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo Institución 2">
+    </header>
+
+    <h1>🎉 Ticket Generado con Éxito</h1>
+
+    <div id="ticketInfo" style="border: 1px dashed #ccc; padding: 20px; border-radius: 8px; background: #f9f9f9;">
+      <h3>Información de tu Turno</h3>
+
+      <p style="font-size: 1.3rem;"><strong>Turno Asignado:</strong> <span style="font-weight: bold; color: #0078d7;">{{ turno.numero_turno }}</span></p>
+
+      <hr>
+
+      <p><strong>Nombre del Tramitante:</strong> <span>{{ solicitante.nombre_tramitante }}</span></p>
+      <p><strong>CURP del Alumno:</strong> <span>{{ solicitante.curp }}</span></p>
+      <p><strong>Fecha de Solicitud:</strong> <span>{{ turno.fecha_solicitud.strftime('%Y-%m-%d %H:%M') }}</span></p>
+
+      <p><strong>Nivel (ID):</strong> <span>{{ turno.id_nivel }}</span></p>
+      <p><strong>Asunto (ID):</strong> <span>{{ turno.id_asunto }}</span></p>
+      <p><strong>Oficina (ID):</strong> <span>{{ turno.id_oficina }}</span></p>
+    </div>
+
+    <div class="form-actions">
+      <a href="{{ url_for('generar_pdf', id_turno=turno.id_turno, curp=solicitante.curp) }}"
+         class="button-link"
+         style="text-decoration: none; padding: 14px 35px; background: #28a745; color: white; border-radius: 8px; font-weight: 600; font-size: 1.1rem; display: inline-block; line-height: 1.35;">
+         Descargar Comprobante (PDF)
+      </a>
+    </div>
+
+    <div class="form-actions" style="margin-top: 10px;">
+        <button type="button" onclick="window.location.href='{{ url_for('root') }}'">Volver al Inicio</button>
+    </div>
+  </div>
+</body>
+</html>
